@@ -54,7 +54,7 @@ export default function Home() {
         method: 'POST',
         headers: {
           'accept': '*/*',
-          'x-api-key': process.env.NEXT_PUBLIC_API_KEY || '',
+          'x-api-key': process.env.NEXT_PRIVATE_API_KEY || '',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({

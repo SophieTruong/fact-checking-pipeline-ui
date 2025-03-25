@@ -65,7 +65,7 @@ export function MetricsView() {
         {
           headers: {
             'accept': 'application/json',
-            'x-api-key': process.env.NEXT_PUBLIC_API_KEY || ''
+            'x-api-key': process.env.NEXT_PRIVATE_API_KEY || ''
           }
         }
       );
