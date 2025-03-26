@@ -291,7 +291,7 @@ export default function ClaimSuccessView({ data, onBack, onFactCheck, factCheckR
             <span className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-3 py-1 rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
               Click this Button when all &apos;Is Checkable Claim?&apos; labels are correct after you have a chance to review and edit them
             </span>
-            Claim Labels are accurate
+            Claim labels are accurate
           </button>
           <button
             onClick={onBack}

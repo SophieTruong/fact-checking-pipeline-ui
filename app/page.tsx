@@ -81,9 +81,9 @@ export default function Home() {
     <main className="min-h-screen p-8 bg-black">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-white">Claim Detection</h1>
+          <h1 className="text-3xl font-bold text-white">Fact-checking Pipeline</h1>
           <div className="space-x-4">
-            {viewState !== 'input' && (
+            {viewState === 'metrics' && (
               <button
                 onClick={handleBack}
                 className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700"
@@ -96,7 +96,7 @@ export default function Home() {
                 onClick={() => setViewState('metrics')}
                 className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
               >
-                View Metrics
+                Performance Monitoring Metrics
               </button>
             )}
           </div>
@@ -141,7 +141,7 @@ export default function Home() {
                   isDisabled={false} 
                 />
                 <div className="border-t border-gray-700 pt-8">
-                  <h2 className="text-2xl font-bold text-white mb-4">Fact Check a Claim</h2>
+                  <h2 className="text-2xl font-bold text-white mb-4">Fact-check a Claim</h2>
                   <ClaimFactCheck onFactCheck={handleFactCheck} />
                 </div>
               </div>
