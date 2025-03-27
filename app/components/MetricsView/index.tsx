@@ -47,6 +47,7 @@ export function MetricsView() {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [metrics, setMetrics] = useState<MetricsResponse | null>(null);
+  const [showMore, setShowMore] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -112,6 +113,16 @@ export function MetricsView() {
             className="w-full p-2 bg-gray-800 border border-gray-700 rounded-md text-white"
           />
         </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-300 mb-2">
+            Claim Detection Model Name
+          </label>
+          <select
+            className="w-full p-2 bg-gray-800 border border-gray-700 rounded-md text-white"
+          >
+            <option value="claim_detection_model_v1">Claim Detection Model v1</option>
+          </select>
+        </div>
       </div>
 
       <button
@@ -139,27 +150,27 @@ export function MetricsView() {
               </div>
               <div>
                 <p className="text-gray-400">Accuracy</p>
-                <p className="text-white">{(metrics.claim_detection_metrics.accuracy).toFixed(2)}</p>
+                <p className="text-white">{(metrics.claim_detection_metrics.accuracy).toFixed(3)}</p>
               </div>
               <div>
                 <p className="text-gray-400">Precision</p>
-                <p className="text-white">{(metrics.claim_detection_metrics.precision).toFixed(2)}</p>
+                <p className="text-white">{(metrics.claim_detection_metrics.precision).toFixed(3)}</p>
               </div>
               <div>
                 <p className="text-gray-400">Recall</p>
-                <p className="text-white">{(metrics.claim_detection_metrics.recall).toFixed(2)}</p>
+                <p className="text-white">{(metrics.claim_detection_metrics.recall).toFixed(3)}</p>
               </div>
               <div>
                 <p className="text-gray-400">F1 Score</p>
-                <p className="text-white">{(metrics.claim_detection_metrics.f1_score).toFixed(2)}</p>
+                <p className="text-white">{(metrics.claim_detection_metrics.f1_score).toFixed(3)}</p>
               </div>
               <div>
                 <p className="text-gray-400">F1 Macro</p>
-                <p className="text-white">{(metrics.claim_detection_metrics.f1_macro).toFixed(2)}</p>
+                <p className="text-white">{(metrics.claim_detection_metrics.f1_macro).toFixed(3)}</p>
               </div>
               <div>
                 <p className="text-gray-400">F1 Weighted</p>
-                <p className="text-white">{(metrics.claim_detection_metrics.f1_weighted).toFixed(2)}</p>
+                <p className="text-white">{(metrics.claim_detection_metrics.f1_weighted).toFixed(3)}</p>
               </div>
             </div>
           </div>
@@ -173,19 +184,19 @@ export function MetricsView() {
               </div>
               <div>
                 <p className="text-gray-400">Close Match Web Search Frequency</p>
-                <p className="text-white">{(metrics.evidence_retrieval_metrics.frq_close_match_websearch).toFixed(2)}</p>
+                <p className="text-white">{(metrics.evidence_retrieval_metrics.frq_close_match_websearch).toFixed(3)}</p>
               </div>
               <div>
                 <p className="text-gray-400">Web Search Max Cosine Similarity</p>
-                <p className="text-white">{(metrics.evidence_retrieval_metrics.web_search_score_max).toFixed(2)}</p>
+                <p className="text-white">{(metrics.evidence_retrieval_metrics.web_search_score_max).toFixed(3)}</p>
               </div>
               <div>
                 <p className="text-gray-400">Close Match Milvus Hybrid Search Frequency</p>
-                <p className="text-white">{(metrics.evidence_retrieval_metrics.frq_close_match_milvus_hybrid_search).toFixed(2)}</p>
+                <p className="text-white">{(metrics.evidence_retrieval_metrics.frq_close_match_milvus_hybrid_search).toFixed(3)}</p>
               </div>
               <div>
                 <p className="text-gray-400">Milvus Hybrid Search Max Rank Score</p>
-                <p className="text-white">{(metrics.evidence_retrieval_metrics.milvus_hybrid_search_score_max).toFixed(2)}</p>
+                <p className="text-white">{(metrics.evidence_retrieval_metrics.milvus_hybrid_search_score_max).toFixed(3)}</p>
               </div>
             </div>
 
@@ -205,19 +216,43 @@ export function MetricsView() {
                 <h4 className="text-lg font-medium text-white mb-2 group relative">
                   Example Claim With Relevant Evidence From Milvus Hybrid Search
                   <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                    Sample claim where most relevant evidence has relevance score of at0.03
+                    Sample claim where most relevant evidence has relevance score of at least 0.03
                   </span>
                 </h4>
                 <p className="text-gray-300">{metrics.evidence_retrieval_metrics.example_claim_high_match_milvus_hybrid_search.claim_text}</p>
               </div>
             )}
-            {metrics.evidence_retrieval_metrics.example_claim_no_evidence_web_search && (
+            <button
+              onClick={() => setShowMore(!showMore)}
+              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            >
+              {showMore ? 'Show Less' : 'Show More'}
+            </button>
+            {showMore && metrics.evidence_retrieval_metrics.freq_empty_milvus_hybrid_search && (
+              <div className="mt-4">
+                <h4 className="text-lg font-medium text-white mb-2">Frequency of No Evidence Found in Milvus Hybrid Search</h4>
+                <p className="text-gray-300">{(metrics.evidence_retrieval_metrics.freq_empty_milvus_hybrid_search).toFixed(3)}</p>
+              </div>
+            )}
+            {showMore && metrics.evidence_retrieval_metrics.freq_empty_web_search && (
+              <div className="mt-4">
+                <h4 className="text-lg font-medium text-white mb-2">Frequency of No Evidence Found from Web Search</h4>
+                <p className="text-gray-300">{(metrics.evidence_retrieval_metrics.freq_empty_web_search).toFixed(3)}</p>
+              </div>
+            )}
+            {showMore && metrics.evidence_retrieval_metrics.n_exact_match_websearch && (
+              <div className="mt-4">
+                <h4 className="text-lg font-medium text-white mb-2">Number of Exact Match Web Search</h4>
+                <p className="text-gray-300">{metrics.evidence_retrieval_metrics.n_exact_match_websearch}</p>
+              </div>
+            )}
+            {showMore && metrics.evidence_retrieval_metrics.example_claim_no_evidence_web_search && (
               <div className="mt-4">
                 <h4 className="text-lg font-medium text-white mb-2">Example No Evidence Claim From Web Search</h4>
                 <p className="text-gray-300">{metrics.evidence_retrieval_metrics.example_claim_no_evidence_web_search.claim_text}</p>
               </div>
             )}
-            {metrics.evidence_retrieval_metrics.example_claim_no_evidence_milvus_hybrid_search && (
+            {showMore && metrics.evidence_retrieval_metrics.example_claim_no_evidence_milvus_hybrid_search && (
               <div className="mt-4">
                 <h4 className="text-lg font-medium text-white mb-2">Example No Evidence Claim From Milvus Hybrid Search</h4>
                 <p className="text-gray-300">{metrics.evidence_retrieval_metrics.example_claim_no_evidence_milvus_hybrid_search.claim_text}</p>
