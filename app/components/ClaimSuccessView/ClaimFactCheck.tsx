@@ -32,7 +32,7 @@ export function ClaimFactCheck({ onFactCheck }: ClaimFactCheckProps) {
 
       <div>
         <label htmlFor="checkDate" className="block text-sm font-medium text-gray-200 mb-1">
-          Check up to date (Optional)
+        Last updated (Optional)
         </label>
         <input
           type="date"

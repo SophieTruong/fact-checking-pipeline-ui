@@ -52,7 +52,7 @@ export default function ClaimFactCheck({
 
       <div>
         <label htmlFor="checkDate" className="block text-sm font-medium text-gray-700 mb-2">
-          Check Up To Date (Optional)
+        Last updated (Optional)
         </label>
         <input
           type="date"

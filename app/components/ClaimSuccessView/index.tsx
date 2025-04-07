@@ -288,10 +288,17 @@ export default function ClaimSuccessView({ data, onBack, onFactCheck, factCheckR
             className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 relative group"
             title="Hint"
           >
-            <span className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-3 py-1 rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-              Click this Button when all &apos;Is Checkable Claim?&apos; labels are correct after you have a chance to review and edit them
-            </span>
-            Claim labels are accurate
+           <div className="flex items-center gap-1 relative group">
+              Claim labels are accurate
+              <span className="cursor-help">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM8.94 6.94a.75.75 0 11-1.061-1.061 3 3 0 112.871 5.026v.345a.75.75 0 01-1.5 0v-.5c0-.72.57-.75 1.5-.75a1.5 1.5 0 100-3zm.5 6.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" clipRule="evenodd" />
+                </svg>
+              </span>
+              <span className="absolute bottom-full mb-2 left-0 bg-gray-800 text-white px-3 py-1 rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none shadow-lg">
+                Click this Button when all &apos;Is Checkable Claim?&apos; labels are correct after you have a chance to review and edit them
+              </span>
+            </div>
           </button>
           <button
             onClick={onBack}

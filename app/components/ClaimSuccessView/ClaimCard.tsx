@@ -106,7 +106,7 @@ export function ClaimCard({
           <div className="space-y-4">
             <div>
               <label htmlFor="checkDate" className="block text-sm font-medium text-gray-900 mb-2">
-                Check Up To Date (Optional)
+              Last updated (Optional)
               </label>
               <input
                 type="date"
