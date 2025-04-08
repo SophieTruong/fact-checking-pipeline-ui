@@ -308,7 +308,51 @@ export default function ClaimSuccessView({ data, onBack, onFactCheck, factCheckR
           </button>
         </div>
       </div>
-
+      <div className="bg-gray-800 rounded-lg p-6 mb-6">
+        <h2 className="text-lg font-semibold text-white mb-3 flex items-center">What is a claim?
+          <span className="relative group inline-flex">
+            <sup className="text-blue-400 cursor-help ml-1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM8.94 6.94a.75.75 0 11-1.061-1.061 3 3 0 112.871 5.026v.345a.75.75 0 01-1.5 0v-.5c0-.72.57-.75 1.5-.75a1.5 1.5 0 100-3zm.5 6.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" clipRule="evenodd" />
+              </svg>
+            </sup>
+            <div className="absolute left-0 bottom-full mb-2 hidden group-hover:block w-96 p-4 bg-gray-900 rounded-lg shadow-lg text-sm text-gray-300 z-10">
+              <p className="font-medium mb-2">L. Konstantinovskiy, O. Price, M. Babakar, and A. Zubiaga, &quot;Toward automated factchecking: Developing an annotation schema and benchmark for consistent automated claim detection,&quot; <em>Digital Threats: Research and Practice</em>, vol. 2, no. 2, pp. 1-16, 2021.</p>
+            </div>
+          </span>
+        </h2>
+        <p className="text-gray-300 mb-4">In our annotation framework, a claim falls into one of these categories:</p>
+        <ul className="space-y-3">
+          <li className="flex items-start">
+            <span className="text-blue-400 mr-2">•</span>
+            <div>
+              <span className="text-gray-200 font-medium">Quantity in the past or present</span>
+              <p className="text-gray-400 italic mt-1">&quot;1 in 4 people wait longer than 6 weeks to see a doctor.&quot;</p>
+            </div>
+          </li>
+          <li className="flex items-start">
+            <span className="text-blue-400 mr-2">•</span>
+            <div>
+              <span className="text-gray-200 font-medium">Correlation or causation</span>
+              <p className="text-gray-400 italic mt-1">&quot;Tetanus vaccine causes infertility&quot;</p>
+            </div>
+          </li>
+          <li className="flex items-start">
+            <span className="text-blue-400 mr-2">•</span>
+            <div>
+              <span className="text-gray-200 font-medium">Current laws or rules of operation</span>
+              <p className="text-gray-400 italic mt-1">&quot;The UK allows a single adult to care for fewer children than other European countries.&quot;</p>
+            </div>
+          </li>
+          <li className="flex items-start">
+            <span className="text-blue-400 mr-2">•</span>
+            <div>
+              <span className="text-gray-200 font-medium">Prediction</span>
+              <p className="text-gray-400 italic mt-1">&quot;The IFS says that school funding will have fallen by 5% by 2019.&quot;</p>
+            </div>
+          </li>
+        </ul>
+      </div>
       <div className="grid grid-cols-1 gap-6">
         <div className="space-y-6">
           {claims
