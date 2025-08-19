@@ -79,6 +79,10 @@ export interface WebSearchResult {
 
 export interface FactCheckResponse {
   claim: string;
-  vector_db_results: VectorDBResult[];
+  vector_db_results: 
+  {
+    facebook_post: VectorDBResult[];
+    news_archive: VectorDBResult[];
+  };
   web_search_results: WebSearchResult[];
 } 

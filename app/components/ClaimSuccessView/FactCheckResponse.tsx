@@ -30,9 +30,9 @@ export function FactCheckResponse({ response }: FactCheckResponseProps) {
             </li>
           </ul>
         </div>
-        {response.vector_db_results && response.vector_db_results.length > 0 ? (
+        {response.vector_db_results && response.vector_db_results.news_archive.length > 0 ? (
           <div className="space-y-4">
-            {response.vector_db_results.slice(0, 3).map((result: VectorDBResult, index: number) => (
+            {response.vector_db_results.news_archive.slice(0, 3).map((result: VectorDBResult, index: number) => (
               <div key={result.id} className="bg-gray-800 border border-gray-700 p-4 rounded-md shadow-sm">
                 <div className="flex justify-between items-start mb-2">
                   <span className="font-medium text-white">Source {index + 1}</span>
@@ -58,7 +58,37 @@ export function FactCheckResponse({ response }: FactCheckResponseProps) {
             ))}
           </div>
         ) : (
-          <p className="text-gray-400">No matching sources found in vector database</p>
+          <p className="text-gray-400">No matching sources found in archived news sources.</p>
+        )}
+        {response.vector_db_results && response.vector_db_results.facebook_post.length > 0 ? (
+          <div className="space-y-4">
+            {response.vector_db_results.facebook_post.slice(0, 3).map((result: VectorDBResult, index: number) => (
+              <div key={result.id} className="bg-gray-800 border border-gray-700 p-4 rounded-md shadow-sm">
+                <div className="flex justify-between items-start mb-2">
+                  <span className="font-medium text-white">Source {index + 1}</span>
+                  <span className="text-sm text-gray-400 group relative">
+                    Score: {(result.score).toFixed(3)}
+                    <span className="inline-flex items-center group">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 cursor-help">
+                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM8.94 6.94a.75.75 0 11-1.061-1.061 3 3 0 112.871 5.026v.345a.75.75 0 01-1.5 0v-.5c0-.72.57-.75 1.5-.75a1.5 1.5 0 100-3zm.5 6.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" clipRule="evenodd" />
+                      </svg>
+                      <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg">
+                        A score between 0-1 showing how closely the content matches your query, combining both keyword and semantic search result ranking.
+                      </span>
+                    </span>
+                  </span>
+                </div>
+                <p className="text-gray-200 mb-2">{result.text}</p>
+                <div className="text-sm text-gray-400">
+                  <p>Source: {result.source}</p>
+                  <p>Date: {result.created_at}</p>
+                  {result.url && <p>URL: {result.url}</p>}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-gray-400">No matching sources found in Facebook posts.</p>
         )}
       </div>
 
