@@ -13,6 +13,26 @@ import { MetricsView } from './components/MetricsView';
 
 type ViewState = 'input' | 'success' | 'error' | 'factCheck' | 'metrics';
 
+// Utility function to clean and parse JSON responses
+const cleanAndParseJson = (responseText: string): FactCheckResponseType => {
+  // Remove the ping line if it exists
+  if (responseText.startsWith(": ping -")) {
+    // Find the first occurrence of '{' to locate the start of JSON
+    const jsonStart = responseText.indexOf('{');
+    if (jsonStart !== -1) {
+      responseText = responseText.substring(jsonStart);
+    }
+  }
+  
+  // Now parse the cleaned JSON
+  try {
+    return JSON.parse(responseText);
+  } catch (error) {
+    console.error('JSON parsing error:', error);
+    throw new Error('Failed to parse response data');
+  }
+};
+
 export default function Home() {
   const [viewState, setViewState] = useState<ViewState>('input');
   const [data, setData] = useState<ClaimDetectionResponse | null>(null);
@@ -69,7 +89,8 @@ export default function Home() {
         throw new Error(`Failed to fact check claim: ${await response.text()}`);
       }
 
-      const data = await response.json();
+      const responseText = await response.text();
+      const data = cleanAndParseJson(responseText);
       setFactCheckResponse(data);
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Failed to fact check claim');
