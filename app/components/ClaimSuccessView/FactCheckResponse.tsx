@@ -30,6 +30,7 @@ export function FactCheckResponse({ response }: FactCheckResponseProps) {
             </li>
           </ul>
         </div>
+        <h4 className="text-lg font-semibold mb-5 text-white">News Articles</h4>
         {response.vector_db_results && response.vector_db_results.news_archive.length > 0 ? (
           <div className="space-y-4">
             {response.vector_db_results.news_archive.slice(0, 3).map((result: VectorDBResult, index: number) => (
@@ -58,8 +59,9 @@ export function FactCheckResponse({ response }: FactCheckResponseProps) {
             ))}
           </div>
         ) : (
-          <p className="text-gray-400">No matching sources found in archived news sources.</p>
+          <p className="text-gray-400">No matching sources found in archived news articles.</p>
         )}
+        <h4 className="text-lg font-semibold mb-5 text-white">Facebook Posts</h4>
         {response.vector_db_results && response.vector_db_results.facebook_post.length > 0 ? (
           <div className="space-y-4">
             {response.vector_db_results.facebook_post.slice(0, 3).map((result: VectorDBResult, index: number) => (
